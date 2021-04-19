@@ -17,5 +17,7 @@ namespace Books.Data
         public int Id { get; set; }
         public string Description { get; set; }
         public string NumberOfPages { get; set; }
+    
+        public virtual Books Books { get; set; }
     }
 }

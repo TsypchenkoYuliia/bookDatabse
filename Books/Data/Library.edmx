@@ -20,9 +20,25 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BookDetails_to_Book_One_to_One">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookDetails">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="newbooksModelStoreContainer">
           <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookDetails_to_Book_One_to_One" Association="Self.FK_BookDetails_to_Book_One_to_One">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookDetails" EntitySet="BookDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -35,10 +51,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookDetails" Relationship="newbooksModel.FK_BookDetails_to_Book_One_to_One" FromRole="Books" ToRole="BookDetails" />
         </EntityType>
         <EntityContainer Name="newbooksEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Books" EntityType="Self.Books" />
           <EntitySet Name="BookDetails" EntityType="newbooksModel.BookDetails" />
+          <AssociationSet Name="FK_BookDetails_to_Book_One_to_One" Association="newbooksModel.FK_BookDetails_to_Book_One_to_One">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookDetails" EntitySet="BookDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BookDetails">
           <Key>
@@ -47,7 +68,20 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfPages" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="newbooksModel.FK_BookDetails_to_Book_One_to_One" FromRole="BookDetails" ToRole="Books" />
         </EntityType>
+        <Association Name="FK_BookDetails_to_Book_One_to_One">
+          <End Type="newbooksModel.Books" Role="Books" Multiplicity="1" />
+          <End Type="newbooksModel.BookDetails" Role="BookDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookDetails">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

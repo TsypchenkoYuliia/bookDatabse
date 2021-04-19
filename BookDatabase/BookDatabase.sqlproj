@@ -66,5 +66,6 @@
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
     <None Include="Scripts\IsActiveFieldNotNull.sql" />
+    <None Include="Scripts\AddConstraintToBookDetailsOneToOne.sql" />
   </ItemGroup>
 </Project>
