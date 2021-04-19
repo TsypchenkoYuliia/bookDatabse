@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BookDetails.cs">
+      <DependentUpon>Library.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Books.cs">
       <DependentUpon>Library.tt</DependentUpon>
     </Compile>
