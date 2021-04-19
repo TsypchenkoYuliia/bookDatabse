@@ -57,8 +57,12 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
   </ItemGroup>
 </Project>
