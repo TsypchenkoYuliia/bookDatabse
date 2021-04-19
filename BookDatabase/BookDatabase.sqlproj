@@ -58,6 +58,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Scripts" />
+    <Folder Include="Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
@@ -65,11 +66,14 @@
     <Build Include="Tables\Publishers.sql" />
     <Build Include="Tables\Authors.sql" />
     <Build Include="Tables\AuthorsBooks.sql" />
+    <Build Include="Procedures\GetBooksByAuthor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
     <None Include="Scripts\IsActiveFieldNotNull.sql" />
     <None Include="Scripts\AddConstraintToBookDetailsOneToOne.sql" />
     <None Include="Scripts\AddConstraintBookToPublishers.sql" />
+    <None Include="Procedures\Execute.sql" />
+    <None Include="Scripts\FillDatabase.sql" />
   </ItemGroup>
 </Project>
