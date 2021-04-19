@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/BookDatabase/obj/Debug
+/BookDatabase/BookDatabase.dbmdl
+/BookDatabase/BookDatabase.jfm
