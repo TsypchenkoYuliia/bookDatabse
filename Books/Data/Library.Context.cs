@@ -28,5 +28,7 @@ namespace Books.Data
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<BookDetails> BookDetails { get; set; }
         public virtual DbSet<Publishers> Publishers { get; set; }
+        public virtual DbSet<Authors> Authors { get; set; }
+        public virtual DbSet<AuthorsBooks> AuthorsBooks { get; set; }
     }
 }

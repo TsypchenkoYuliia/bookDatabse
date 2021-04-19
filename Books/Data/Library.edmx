@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="newbooksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuthorsBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BookDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,7 +34,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PublisherId" Type="int" />
         </EntityType>
         <EntityType Name="Publishers">
           <Key>
@@ -28,25 +42,43 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Books_to_Publishers_One_to_Many">
-          <End Role="Publishers" Type="Self.Publishers" Multiplicity="0..1" />
-          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+        <Association Name="FK_to_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="AuthorsBooks" Type="Self.AuthorsBooks" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Publishers">
+            <Principal Role="Authors">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Books">
-              <PropertyRef Name="PublisherId" />
+            <Dependent Role="AuthorsBooks">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_to_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="AuthorsBooks" Type="Self.AuthorsBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsBooks">
+              <PropertyRef Name="BookId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="newbooksModelStoreContainer">
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorsBooks" EntityType="Self.AuthorsBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publishers" EntityType="Self.Publishers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Books_to_Publishers_One_to_Many" Association="Self.FK_Books_to_Publishers_One_to_Many">
-            <End Role="Publishers" EntitySet="Publishers" />
+          <AssociationSet Name="FK_to_Authors" Association="Self.FK_to_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="AuthorsBooks" EntitySet="AuthorsBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_to_Books" Association="Self.FK_to_Books">
             <End Role="Books" EntitySet="Books" />
+            <End Role="AuthorsBooks" EntitySet="AuthorsBooks" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -63,6 +95,7 @@
           <NavigationProperty Name="BookDetails" Relationship="newbooksModel.FK_BookDetails_to_Book_One_to_One" FromRole="Books" ToRole="BookDetails" />
           <Property Name="PublisherId" Type="Int32" />
           <NavigationProperty Name="Publishers" Relationship="newbooksModel.FK_Books_to_Publishers_One_to_Many" FromRole="Books" ToRole="Publishers" />
+          <NavigationProperty Name="AuthorsBooks" Relationship="newbooksModel.FK_to_Books" FromRole="Books" ToRole="AuthorsBooks" />
         </EntityType>
         <EntityContainer Name="newbooksEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Books" EntityType="Self.Books" />
@@ -75,6 +108,16 @@
           <AssociationSet Name="FK_Books_to_Publishers_One_to_Many" Association="newbooksModel.FK_Books_to_Publishers_One_to_Many">
             <End Role="Publishers" EntitySet="Publishers" />
             <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <EntitySet Name="Authors" EntityType="newbooksModel.Authors" />
+          <EntitySet Name="AuthorsBooks" EntityType="newbooksModel.AuthorsBooks" />
+          <AssociationSet Name="FK_to_Authors" Association="newbooksModel.FK_to_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="AuthorsBooks" EntitySet="AuthorsBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_to_Books" Association="newbooksModel.FK_to_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="AuthorsBooks" EntitySet="AuthorsBooks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BookDetails">
@@ -118,6 +161,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthorsBooks" Relationship="newbooksModel.FK_to_Authors" FromRole="Authors" ToRole="AuthorsBooks" />
+        </EntityType>
+        <EntityType Name="AuthorsBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Authors" Relationship="newbooksModel.FK_to_Authors" FromRole="AuthorsBooks" ToRole="Authors" />
+          <NavigationProperty Name="Books" Relationship="newbooksModel.FK_to_Books" FromRole="AuthorsBooks" ToRole="Books" />
+        </EntityType>
+        <Association Name="FK_to_Authors">
+          <End Type="newbooksModel.Authors" Role="Authors" Multiplicity="1" />
+          <End Type="newbooksModel.AuthorsBooks" Role="AuthorsBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsBooks">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_to_Books">
+          <End Type="newbooksModel.Books" Role="Books" Multiplicity="1" />
+          <End Type="newbooksModel.AuthorsBooks" Role="AuthorsBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthorsBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -127,7 +212,6 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="newbooksModel.Books">
               <MappingFragment StoreEntitySet="Books">
-                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -146,6 +230,23 @@
             <EntityTypeMapping TypeName="newbooksModel.Publishers">
               <MappingFragment StoreEntitySet="Publishers">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="newbooksModel.Authors">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorsBooks">
+            <EntityTypeMapping TypeName="newbooksModel.AuthorsBooks">
+              <MappingFragment StoreEntitySet="AuthorsBooks">
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

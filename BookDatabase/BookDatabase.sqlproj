@@ -63,6 +63,8 @@
     <Build Include="Tables\Books.sql" />
     <Build Include="Tables\BookDetails.sql" />
     <Build Include="Tables\Publishers.sql" />
+    <Build Include="Tables\Authors.sql" />
+    <Build Include="Tables\AuthorsBooks.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />

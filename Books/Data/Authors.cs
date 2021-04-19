@@ -12,21 +12,17 @@ namespace Books.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Books
+    public partial class Authors
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Books()
+        public Authors()
         {
             this.AuthorsBooks = new HashSet<AuthorsBooks>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool isActive { get; set; }
-        public Nullable<int> PublisherId { get; set; }
     
-        public virtual BookDetails BookDetails { get; set; }
-        public virtual Publishers Publishers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuthorsBooks> AuthorsBooks { get; set; }
     }
