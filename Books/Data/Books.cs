@@ -24,10 +24,13 @@ namespace Books.Data
         public string Name { get; set; }
         public bool isActive { get; set; }
         public Nullable<int> PublisherId { get; set; }
+        public Nullable<int> PublisherId1 { get; set; }
+        public bool isActive1 { get; set; }
     
         public virtual BookDetails BookDetails { get; set; }
         public virtual Publishers Publishers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuthorsBooks> AuthorsBooks { get; set; }
+        public virtual Publishers Publishers1 { get; set; }
     }
 }

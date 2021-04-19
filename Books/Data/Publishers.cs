@@ -18,6 +18,7 @@ namespace Books.Data
         public Publishers()
         {
             this.Books = new HashSet<Books>();
+            this.Books1 = new HashSet<Books>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace Books.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Books> Books { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Books> Books1 { get; set; }
     }
 }

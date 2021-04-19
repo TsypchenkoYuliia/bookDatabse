@@ -59,6 +59,7 @@
     <Folder Include="Tables" />
     <Folder Include="Scripts" />
     <Folder Include="Procedures" />
+    <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
@@ -67,6 +68,7 @@
     <Build Include="Tables\Authors.sql" />
     <Build Include="Tables\AuthorsBooks.sql" />
     <Build Include="Procedures\GetBooksByAuthor.sql" />
+    <Build Include="Functions\GetBooksCount.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
@@ -75,5 +77,6 @@
     <None Include="Scripts\AddConstraintBookToPublishers.sql" />
     <None Include="Procedures\Execute.sql" />
     <None Include="Scripts\FillDatabase.sql" />
+    <None Include="Functions\FunctionExecute.sql" />
   </ItemGroup>
 </Project>

@@ -8,12 +8,13 @@
         <EntityTypeShape EntityType="newbooksModel.Books" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="newbooksModel.BookDetails" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="newbooksModel.FK_BookDetails_to_Book_One_to_One" />
-        <EntityTypeShape EntityType="newbooksModel.Publishers" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="newbooksModel.Publishers" Width="1.5" PointX="1" PointY="4.5" />
         <AssociationConnector Association="newbooksModel.FK_Books_to_Publishers_One_to_Many" />
         <EntityTypeShape EntityType="newbooksModel.Authors" Width="1.5" PointX="3.5" PointY="3.625" />
         <EntityTypeShape EntityType="newbooksModel.AuthorsBooks" Width="1.5" PointX="6.125" PointY="2.125" />
         <AssociationConnector Association="newbooksModel.FK_to_Authors" />
         <AssociationConnector Association="newbooksModel.FK_to_Books" />
+        <AssociationConnector Association="newbooksModel.FK_Books_to_Publishers_One_to_Many1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

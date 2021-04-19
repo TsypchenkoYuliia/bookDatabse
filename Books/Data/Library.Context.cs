@@ -12,6 +12,8 @@ namespace Books.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class newbooksEntities : DbContext
     {
@@ -30,5 +32,18 @@ namespace Books.Data
         public virtual DbSet<Publishers> Publishers { get; set; }
         public virtual DbSet<Authors> Authors { get; set; }
         public virtual DbSet<AuthorsBooks> AuthorsBooks { get; set; }
+    
+        public virtual ObjectResult<string> GetBooksByAuthor(string param1, Nullable<int> author_id)
+        {
+            var param1Parameter = param1 != null ?
+                new ObjectParameter("param1", param1) :
+                new ObjectParameter("param1", typeof(string));
+    
+            var author_idParameter = author_id.HasValue ?
+                new ObjectParameter("author_id", author_id) :
+                new ObjectParameter("author_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetBooksByAuthor", param1Parameter, author_idParameter);
+        }
     }
 }
