@@ -64,5 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
+    <None Include="Scripts\IsActiveFieldNotNull.sql" />
   </ItemGroup>
 </Project>
