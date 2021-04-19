@@ -62,10 +62,12 @@
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
     <Build Include="Tables\BookDetails.sql" />
+    <Build Include="Tables\Publishers.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />
     <None Include="Scripts\IsActiveFieldNotNull.sql" />
     <None Include="Scripts\AddConstraintToBookDetailsOneToOne.sql" />
+    <None Include="Scripts\AddConstraintBookToPublishers.sql" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="newbooksModel.Books" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="newbooksModel.BookDetails" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="newbooksModel.FK_BookDetails_to_Book_One_to_One" />
+        <EntityTypeShape EntityType="newbooksModel.Publishers" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="newbooksModel.FK_Books_to_Publishers_One_to_Many" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
