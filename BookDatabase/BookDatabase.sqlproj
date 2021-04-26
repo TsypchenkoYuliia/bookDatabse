@@ -60,6 +60,7 @@
     <Folder Include="Scripts" />
     <Folder Include="Procedures" />
     <Folder Include="Functions" />
+    <Folder Include="View" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
@@ -69,6 +70,7 @@
     <Build Include="Tables\AuthorsBooks.sql" />
     <Build Include="Procedures\GetBooksByAuthor.sql" />
     <Build Include="Functions\GetBooksCount.sql" />
+    <Build Include="View\BooksReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AddIsActiveFieldToBooks.sql" />

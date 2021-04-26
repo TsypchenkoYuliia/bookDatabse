@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="newbooksModel.AuthorsBooks" Width="1.5" PointX="6.125" PointY="2.125" />
         <AssociationConnector Association="newbooksModel.FK_to_Authors" />
         <AssociationConnector Association="newbooksModel.FK_to_Books" />
-        <AssociationConnector Association="newbooksModel.FK_Books_to_Publishers_One_to_Many1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
